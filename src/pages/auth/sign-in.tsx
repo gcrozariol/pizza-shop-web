@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -19,8 +20,17 @@ export function SignIn() {
     formState: { isSubmitting },
   } = useForm<SignInForm>()
 
-  function handleSignIn({ email }: SignInForm) {
-    console.log(email)
+  function handleSignIn(data: SignInForm) {
+    try {
+      toast.success('An authentication link was sent to your e-mail.', {
+        action: {
+          label: 'Resend',
+          onClick: () => handleSignIn(data),
+        },
+      })
+    } catch {
+      toast.error('Invalid credentials.')
+    }
   }
 
   return (
