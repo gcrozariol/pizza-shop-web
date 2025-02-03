@@ -42,7 +42,6 @@ export function Orders() {
               })}
             </TableBody>
           </Table>
-          O
         </div>
       </div>
     </>
